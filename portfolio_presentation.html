@@ -28,6 +28,7 @@
             padding: 2rem;
             display: flex;
             justify-content: center;
+            overflow-x: hidden;
         }
 
         .presentation-container {
@@ -35,6 +36,7 @@
             max-width: 1000px;
         }
 
+        /* Entry Animations */
         .slide {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -45,6 +47,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            
+            /* Initial Animation State */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Trigger class applied on scroll */
+        .slide.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h1 {
@@ -89,12 +102,23 @@
             align-items: center;
             justify-content: center;
             height: 350px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
         }
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.04);
         }
 
         .metrics-grid {
@@ -110,6 +134,12 @@
             padding: 1.5rem;
             border-radius: 8px;
             text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .metric-number {
@@ -136,6 +166,14 @@
             font-weight: 600;
         }
 
+        tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tr:hover td {
+            background-color: rgba(56, 189, 248, 0.03);
+        }
+
         .tag {
             display: inline-block;
             background-color: var(--border);
@@ -145,6 +183,12 @@
             font-size: 0.875rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .tag:hover {
+            background-color: var(--accent);
+            color: var(--bg-main);
         }
 
         .gallery-grid {
@@ -161,12 +205,13 @@
             overflow: hidden;
             height: 180px;
             cursor: pointer;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
 
         .gallery-item:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
             border-color: var(--accent);
+            z-index: 2;
         }
 
         .gallery-item img {
@@ -175,20 +220,24 @@
             object-fit: cover;
         }
 
-        /* Lightbox */
+        /* Lightbox Overlay Animation */
         .lightbox {
-            display: none;
+            display: flex;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.92);
+            background: rgba(15, 23, 42, 0.95);
             z-index: 999;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
         }
 
         .lightbox.active {
-            display: flex;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .lightbox img {
@@ -199,6 +248,12 @@
             object-fit: contain;
             border-radius: 8px;
             border: 1px solid var(--border);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
         }
 
         .lightbox-close {
@@ -209,6 +264,12 @@
             font-size: 2.5rem;
             cursor: pointer;
             line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.1);
+            color: var(--accent);
         }
     </style>
 </head>
@@ -222,10 +283,10 @@
             <p style="color: var(--accent); font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">UX/UI & Sketches Portfolio</p>
             <p>Product Designer focused on building high-impact, data-driven digital experiences. Here is a look at my end-to-end design process, from initial conceptual discovery to final production mockups.</p>
             <div>
-                <span class="tag">Figma</span>
-                <span class="tag">Product Strategy</span>
+                <span class="tag">Design Strategy</span>
                 <span class="tag">User Research</span>
                 <span class="tag">Wireframing</span>
+                <span class="tag">Visual Systems</span>
             </div>
         </section>
 
@@ -370,15 +431,37 @@
     </div>
 
     <script>
+        // Intersection Observer for Slide Fade-in Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide').forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Lightbox Script Logic
         document.querySelectorAll('.gallery-item img').forEach(function(img) {
             img.addEventListener('click', function() {
                 document.getElementById('lightbox-img').src = this.src;
                 document.getElementById('lightbox').classList.add('active');
             });
         });
+        
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
+        
         document.getElementById('lightbox').addEventListener('click', function(e) {
             if (e.target === this) closeLightbox();
         });
