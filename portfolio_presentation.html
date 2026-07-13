@@ -1,453 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth; background-color: #FFFFFF; color: #111111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; -webkit-font-smoothing: antialiased; box-sizing: border-box; margin: 0; padding: 0;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saifuddin Khan - Showcase Website</title>
+    <title>Fashion Portfolio | Luxury Editorial Showcase</title>
+    <!-- Internal styles block handles core responsiveness and hover transition variables -->
     <style>
-        :root {
-            --bg-main: #0B0F19;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
-            --accent: #38BDF8;
-            --border: rgba(51, 65, 85, 0.5);
-            --glow: rgba(56, 189, 248, 0.15);
+        *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+        .nav-link:hover { color: #C5A880 !important; }
+        .btn-primary:hover { background-color: #C5A880 !important; border-color: #C5A880 !important; color: #111111 !important; }
+        .btn-secondary:hover { background-color: #FBF9F6 !important; border-color: #111111 !important; }
+        .skill-card:hover { transform: translateY(-5px) !important; border-color: #C5A880 !important; box-shadow: 0 15px 35px rgba(17,17,17,0.08) !important; }
+        .portfolio-card:hover .editorial-img { transform: scale(1.05) !important; }
+        .gold-link:hover { color: #A3855C !important; }
+        .form-input:focus { outline: none; border-bottom-color: #A3855C !important; }
+        .footer-link:hover { color: #C5A880 !important; }
+        .back-to-top:hover { transform: translateY(-3px) !important; }
+        
+        /* Layout Grid Responsive Overrides */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr !important; padding: 4rem 2rem !important; gap: 3rem !important; text-align: center !important; }
+            .hero-content { max-width: 100% !important; margin: 0 auto !important; }
+            .hero-actions { justify-content: center !important; }
+            .hero-image-panel { height: 55vh !important; }
+            .responsive-grid-2 { grid-template-columns: 1fr !important; gap: 4rem !important; }
+            .about-image-panel { height: 450px !important; }
+            .main-header { padding: 1.5rem 2rem !important; }
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Header Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* Website Layout Container */
-        .wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Sections Styling */
-        section {
-            padding: 8rem 0 4rem 0;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        section.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero Panel Section */
-        #hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-top: 0;
-        }
-
-        /* Animated Title Name */
-        .animated-name {
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #F8FAFC 20%, #38BDF8 50%, #F8FAFC 80%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 6s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        /* Showcase Split Content Layout */
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 4rem;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .showcase-grid.reverse {
-            direction: rtl;
-        }
-        .showcase-grid.reverse .showcase-text {
-            direction: ltr;
-        }
-
-        h2 {
-            font-size: 2.25rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
-        }
-
-        p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Interactive Image Panels */
-        .web-image-panel {
-            background-color: #020617;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            height: 400px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .web-image-panel:hover {
-            transform: scale(1.03) translateY(-5px) rotate(0.5deg);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px var(--glow);
-        }
-
-        .web-image-panel img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .web-image-panel:hover img {
-            transform: scale(1.06);
-        }
-
-        /* Gallery Grid Layout */
-        .gallery-head {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .gallery-item {
-            background-color: #020617;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            height: 180px;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.08) translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-            z-index: 5;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Lightbox Systems */
-        .lightbox {
-            display: flex;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.96);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        .lightbox.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .lightbox img {
-            max-width: 85%;
-            max-height: 85%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transform: scale(0.92);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .lightbox.active img {
-            transform: scale(1);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            color: var(--text-main);
-            font-size: 3rem;
-            cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-
-        .lightbox-close:hover {
-            transform: scale(1.1);
-            color: var(--accent);
-        }
-
-        footer {
-            text-align: center;
-            padding: 6rem 0 3rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border);
-            margin-top: 4rem;
-        }
-
-        /* Responsive Settings */
-        @media (max-width: 968px) {
-            header { padding: 1.5rem 2rem; }
-            .animated-name { font-size: 3.5rem; }
-            .showcase-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
-            .showcase-grid.reverse { direction: ltr; }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem !important; }
+            .section-title { font-size: 2.25rem !important; }
+            .nav-menu { display: none !important; }
+            .responsive-grid-testimonials { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .contact-form-panel { padding: 2rem !important; }
+            .footer-container { flex-direction: column !important; text-align: center !important; }
+            .footer-socials a { margin: 0 0.75rem !important; }
         }
     </style>
 </head>
-<body>
+<body style="overflow-x: hidden; margin: 0; padding: 0;">
 
-    <header>
-        <a href="#hero" class="logo">SK</a>
-        <nav>
-            <a href="#sketches">01. Sketches</a>
-            <a href="#uxui">02. Interfaces</a>
-            <a href="#gallery">03. Archive</a>
+    <!-- BACK TO TOP TARGET -->
+    <div id="home"></div>
+
+    <!-- 1. HEADER & NAVIGATION -->
+    <header class="main-header" style="position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.93); backdrop-filter: blur(10px); border-bottom: 1px solid #FBF9F6; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; z-index: 1000;">
+        <a href="#home" class="logo" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 1.4rem; color: #111111; text-decoration: none; font-weight: 700; letter-spacing: 3px;">FASHION PORTFOLIO</a>
+        <nav class="nav-menu" style="display: flex; gap: 2.5rem;">
+            <a href="#home" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">Home</a>
+            <a href="#about" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">About</a>
+            <a href="#skills" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">Skills</a>
+            <a href="#portfolio" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">Portfolio</a>
+            <a href="#experience" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">Experience</a>
+            <a href="#contact" class="nav-link" style="text-decoration: none; color: #111111; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 400; transition: color 0.3s ease;">Contact</a>
         </nav>
     </header>
 
-    <div class="wrapper">
-
-        <!-- HERO ENTRY PANEL -->
-        <section id="hero">
-            <h1 class="animated-name">Saifuddin Khan</h1>
-        </section>
-
-        <!-- SECTION 1: SKETCHES SCREEN -->
-        <section id="sketches">
-            <div class="showcase-grid">
-                <div class="showcase-text">
-                    <h2>01. Discovery & Wireframing</h2>
-                    <p>Every project starts by understanding user pain points. I map out early user flows and map structural wireframes on paper to iterate rapidly before touching digital design tools.</p>
-                    <p>This phase ensures information hierarchy aligns perfectly with business objectives and technical scoping constraints.</p>
-                </div>
-                <div class="web-image-panel view-trigger">
-                    <img src="Sketches.png" alt="Saifuddin Khan Sketches Panel">
+    <!-- 2. HERO SECTION -->
+    <section class="hero-section" style="background-color: #FBF9F6; min-height: 100vh; display: flex; align-items: center; padding-top: 80px;">
+        <div class="hero-container" style="max-width: 1400px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; padding: 0 4rem; gap: 4rem;">
+            <div class="hero-content" style="max-width: 620px;">
+                <p class="hero-sub" style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 4px; color: #A3855C; margin-bottom: 1.5rem; font-weight: 600;">Haute Couture & Ready-to-Wear</p>
+                <h1 class="hero-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 4.5rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 1rem; color: #111111;">Saifuddin Khan</h1>
+                <p class="hero-role" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 1.5rem; font-style: italic; color: #444444; margin-bottom: 2rem;">Senior Fashion Designer</p>
+                <p class="hero-desc" style="color: #444444; line-height: 1.7; font-size: 1.15rem; margin-bottom: 3rem;">Crafting contemporary luxury through structural silhouettes, avant-garde garment construction, and sustainable textile innovations.</p>
+                <div class="hero-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#portfolio" class="btn btn-primary" style="display: inline-block; padding: 1rem 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; font-weight: 500; background-color: #111111; color: #FFFFFF; border: 1px solid #111111;">View Portfolio</a>
+                    <a href="#" class="btn btn-secondary" style="display: inline-block; padding: 1rem 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; font-weight: 500; background-color: transparent; color: #111111; border: 1px solid #F3ECE3;">Download Resume</a>
+                    <a href="#contact" class="btn btn-secondary" style="display: inline-block; padding: 1rem 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; font-weight: 500; background-color: transparent; color: #111111; border: 1px solid #F3ECE3;">Contact Me</a>
                 </div>
             </div>
-        </section>
+            <div class="hero-image-panel" style="height: 75vh; min-height: 500px; overflow: hidden; border-radius: 24px; box-shadow: 0 30px 60px rgba(17,17,17,0.08);">
+                <img src="img01.jpg" alt="Fashion Designer Portrait" class="editorial-img" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+            </div>
+        </div>
+    </section>
 
-        <!-- SECTION 2: DIGITAL UI SCREEN -->
-        <section id="uxui">
-            <div class="showcase-grid reverse">
-                <div class="showcase-text">
-                    <h2>02. High-Fidelity UI Design</h2>
-                    <p>Translating validated wireframes into responsive, pixel-perfect UI designs. I establish scalable design systems with reusable components, clear typography hierarchies, and strict WCAG accessibility standards.</p>
-                    <p>Designs are built ready for smooth, seamless handoff to engineering teams.</p>
+    <!-- 3. ABOUT SECTION -->
+    <section id="about" class="about-section" style="padding: 10rem 0; background-color: #FFFFFF;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="about-grid responsive-grid-2" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: center;">
+                <div class="about-image-panel" style="height: 600px; overflow: hidden; box-shadow: 0 20px 40px rgba(17,17,17,0.04); border-radius: 16px;">
+                    <img src="img02.jpg" alt="Design Studio Work" class="editorial-img" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
                 </div>
-                <div class="web-image-panel view-trigger">
-                    <img src="UXUI.png" alt="Saifuddin Khan UI Systems">
+                <div class="about-content">
+                    <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">The Designer</span>
+                    <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3rem; position: relative;">Biography & Philosophy</h2>
+                    <p class="about-text" style="color: #444444; line-height: 1.7; font-size: 1.05rem; margin-bottom: 1.5rem;">With over a decade of dedicated industry experience, my design ethos balances traditional artisanal craftsmanship with progressive, modern aesthetics. I am deeply passionate about how raw textures interact with architectural forms on the human body.</p>
+                    <p class="about-text" style="color: #444444; line-height: 1.7; font-size: 1.05rem; margin-bottom: 1.5rem;">Every collection begins as an intimate conversation between conceptual draping and experimental fabric manipulation, ensuring each garment functions as a piece of wearable contemporary art.</p>
+                    <div class="about-meta" style="display: flex; gap: 4rem; margin-top: 3rem; border-top: 1px solid #F3ECE3; padding-top: 2rem;">
+                        <div class="meta-item">
+                            <span class="meta-number" style="display: block; font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 3rem; color: #C5A880; line-height: 1; margin-bottom: 0.5rem;">10+</span>
+                            <span class="meta-label" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: #444444;">Years Experience</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-number" style="display: block; font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 3rem; color: #C5A880; line-height: 1; margin-bottom: 0.5rem;">15+</span>
+                            <span class="meta-label" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: #444444;">Runway Shows</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 3: 49 COMPLETE ARCHIVE IMAGES -->
-        <section id="gallery">
-            <div class="gallery-head">
-                <h2>03. Full Portfolio Archive</h2>
-                <p>An expansive documentation grid consisting of foundational work, mockups, and development sketches.</p>
+    <!-- 4. SKILLS SECTION -->
+    <section id="skills" class="skills-section" style="padding: 10rem 0; background-color: #FBF9F6;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="text-center" style="text-align: center;">
+                <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">Expertise</span>
+                <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Aesthetic & Technical Skills</h2>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="img01.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img02.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img03.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img04.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img05.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img06.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img07.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img08.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img09.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img10.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img11.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img12.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img13.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img14.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img15.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img16.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img17.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img18.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img19.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img20.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img21.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img22.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img23.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img24.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img25.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img26.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img27.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img28.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img29.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img30.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img31.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img32.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img33.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img34.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img35.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img36.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img37.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img38.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img39.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img40.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img41.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img42.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img43.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img44.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img45.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img46.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img47.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img48.jpg" alt="Portfolio Screen Asset"></div>
-                <div class="gallery-item"><img src="img49.jpg" alt="Portfolio Screen Asset"></div>
+            <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Fashion Illustration</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Fluid, expressive hand-sketched styling concepts and structural collection lineups.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Pattern Making</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Advanced flat pattern drafting and precision dynamic structural mapping.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Garment Construction</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Couture-grade tailoring techniques and complete sample collection assembly.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Textile Design</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Custom fabric surface manipulation, print layout mapping, and weaving selection.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Adobe Illustrator</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Pixel-perfect digital flat vector technical sketching and exact BOM production specs.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Photoshop</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">High-end editorial digital mood board construction and digital textile texture rendering.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">CAD Design</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Modern digital pattern grading and automated manufacturing layout file prep.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Draping</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Intuitive structural architectural draping directly on 3D dress forms.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Embroidery</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Intricate, meticulous hand-beading maps and automated high-end digital stitch path programming.</p>
+                </div>
+                <div class="skill-card" style="background-color: #FFFFFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(17,17,17,0.04); border: 1px solid transparent; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.35rem; margin-bottom: 1rem; color: #111111;">Styling</h3>
+                    <p style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Cohesive collection curation, runway presentation coordination, and editorial photography styling.</p>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2026 Saifuddin Khan. All Rights Reserved.</p>
-        </footer>
+    <!-- 5. PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio-section" style="padding: 10rem 0; background-color: #FFFFFF;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="text-center" style="text-align: center;">
+                <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">Lookbook</span>
+                <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Selected Collections</h2>
+            </div>
+            <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem;">
+                <!-- Card 1 -->
+                <div class="portfolio-card" style="background-color: #FFFFFF; overflow: hidden; transition: transform 0.4s ease;">
+                    <div class="portfolio-img-box" style="height: 500px; overflow: hidden; border-radius: 16px; box-shadow: 0 15px 30px rgba(17,17,17,0.04); margin-bottom: 1.5rem; background-color: #FBF9F6;">
+                        <img src="img03.jpg" alt="Collection Preview" class="editorial-img" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-meta" style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Autumn/Winter 2026 &bull; Ready-to-Wear</span>
+                        <h3 class="portfolio-name" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.6rem; margin-bottom: 0.75rem;">Minimalist Brutalism</h3>
+                        <p class="portfolio-desc" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">An exploration of clean, severe architectural lines translated into heavy structured wool coats and deconstructed silhouettes.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="portfolio-card" style="background-color: #FFFFFF; overflow: hidden; transition: transform 0.4s ease;">
+                    <div class="portfolio-img-box" style="height: 500px; overflow: hidden; border-radius: 16px; box-shadow: 0 15px 30px rgba(17,17,17,0.04); margin-bottom: 1.5rem; background-color: #FBF9F6;">
+                        <img src="img04.jpg" alt="Collection Preview" class="editorial-img" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-meta" style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Spring/Summer 2026 &bull; Haute Couture</span>
+                        <h3 class="portfolio-name" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.6rem; margin-bottom: 0.75rem;">Ethereal Flora</h3>
+                        <p class="portfolio-desc" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Hand-dyed organic silks manipulated with meticulous micro-pleating and complex botanical surface embroidery details.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="portfolio-card" style="background-color: #FFFFFF; overflow: hidden; transition: transform 0.4s ease;">
+                    <div class="portfolio-img-box" style="height: 500px; overflow: hidden; border-radius: 16px; box-shadow: 0 15px 30px rgba(17,17,17,0.04); margin-bottom: 1.5rem; background-color: #FBF9F6;">
+                        <img src="img05.jpg" alt="Collection Preview" class="editorial-img" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-meta" style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Resort 2025 &bull; Luxury Capsule</span>
+                        <h3 class="portfolio-name" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.6rem; margin-bottom: 0.75rem;">Monochrome Nomad</h3>
+                        <p class="portfolio-desc" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Fluid linen assemblies blended seamlessly with asymmetric knit structures designed for cross-seasonal versatile wear.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- 6 & 7. EXPERIENCE & EDUCATION TIMELINE -->
+    <section id="experience" class="timeline-section" style="padding: 10rem 0; background-color: #FBF9F6;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="timeline-master-grid responsive-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;">
+                
+                <!-- Experience Column -->
+                <div>
+                    <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Experience</h2>
+                    <div class="timeline-container" style="border-left: 2px solid #F3ECE3; padding-left: 2rem;">
+                        <div class="timeline-item" style="position: relative; margin-bottom: 3.5rem;">
+                            <span class="timeline-dot" style="position: absolute; left: calc(-2rem - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: #C5A880; border: 2px solid #FBF9F6;"></span>
+                            <span class="timeline-date" style="display: inline-block; font-size: 0.85rem; font-weight: 700; color: #A3855C; letter-spacing: 1px; margin-bottom: 0.5rem;">2023 - Present</span>
+                            <h3 class="timeline-heading" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.4rem; margin-bottom: 0.25rem;">Senior Fashion Designer</h3>
+                            <p class="timeline-sub" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; color: #444444; margin-bottom: 1rem; font-size: 1rem;">Maison de Luxe, Paris</p>
+                            <p class="timeline-text" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Leading the directional creative design strategy for seasonal ready-to-wear lines. Collaborated directly with textile mills to engineer exclusive sustainable fabrics.</p>
+                        </div>
+                        <div class="timeline-item" style="position: relative; margin-bottom: 3.5rem;">
+                            <span class="timeline-dot" style="position: absolute; left: calc(-2rem - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: #C5A880; border: 2px solid #FBF9F6;"></span>
+                            <span class="timeline-date" style="display: inline-block; font-size: 0.85rem; font-weight: 700; color: #A3855C; letter-spacing: 1px; margin-bottom: 0.5rem;">2019 - 2023</span>
+                            <h3 class="timeline-heading" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.4rem; margin-bottom: 0.25rem;">Associate Designer</h3>
+                            <p class="timeline-sub" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; color: #444444; margin-bottom: 1rem; font-size: 1rem;">Atelier Avant-Garde, Milan</p>
+                            <p class="timeline-text" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Managed technical prototyping, digital CAD layouts, flat sample adjustments, and collection handoff to international production teams.</p>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- MAIN INTERACTIVE OVERLAY LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="Expanded View Asset">
-    </div>
+                <!-- Education Column -->
+                <div>
+                    <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Education</h2>
+                    <div class="timeline-container" style="border-left: 2px solid #F3ECE3; padding-left: 2rem;">
+                        <div class="timeline-item" style="position: relative; margin-bottom: 3.5rem;">
+                            <span class="timeline-dot" style="position: absolute; left: calc(-2rem - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: #C5A880; border: 2px solid #FBF9F6;"></span>
+                            <span class="timeline-date" style="display: inline-block; font-size: 0.85rem; font-weight: 700; color: #A3855C; letter-spacing: 1px; margin-bottom: 0.5rem;">2015 - 2019</span>
+                            <h3 class="timeline-heading" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.4rem; margin-bottom: 0.25rem;">Master of Fine Arts in Fashion Design</h3>
+                            <p class="timeline-sub" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; color: #444444; margin-bottom: 1rem; font-size: 1rem;">Institut de la Mode, Paris</p>
+                            <p class="timeline-text" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Specialized concentration in Advanced Haute Couture Drapery, Conceptual Creative Collection Frameworks, and Historical Costuming Analysis.</p>
+                        </div>
+                        <div class="timeline-item" style="position: relative; margin-bottom: 3.5rem;">
+                            <span class="timeline-dot" style="position: absolute; left: calc(-2rem - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: #C5A880; border: 2px solid #FBF9F6;"></span>
+                            <span class="timeline-date" style="display: inline-block; font-size: 0.85rem; font-weight: 700; color: #A3855C; letter-spacing: 1px; margin-bottom: 0.5rem;">2011 - 2015</span>
+                            <h3 class="timeline-heading" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.4rem; margin-bottom: 0.25rem;">Bachelor of Design (Fashion)</h3>
+                            <p class="timeline-sub" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; color: #444444; margin-bottom: 1rem; font-size: 1rem;">Academy of Art & Textile Systems</p>
+                            <p class="timeline-text" style="color: #444444; line-height: 1.7; font-size: 0.95rem;">Graduated with High Honors. Core coursework covered flat industrial pattern drafting, rigorous textile chemistry, and technical apparel manufacturing design.</p>
+                        </div>
+                    </div>
+                </div>
 
-    <script>
-        // Website Scroll Reveal Animations Configuration
-        const sectionObserverOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
+            </div>
+        </div>
+    </section>
 
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, sectionObserverOptions);
+    <!-- 8. AWARDS & CERTIFICATIONS -->
+    <section class="awards-section" style="padding: 10rem 0; background-color: #FFFFFF;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="text-center" style="text-align: center;">
+                <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">Recognition</span>
+                <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Awards & Certifications</h2>
+            </div>
+            <div class="awards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="award-card" style="background-color: #FBF9F6; border-radius: 16px; padding: 3rem 2rem; text-align: center; box-shadow: 0 10px 20px rgba(17,17,17,0.04); border: 1px solid #F3ECE3;">
+                    <div class="award-gold-badge" style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #C5A880;">&#127942;</div>
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.3rem; margin-bottom: 0.5rem;">Emerging Designer of the Year</h3>
+                    <p style="color: #A3855C; line-height: 1.7; font-size: 0.9rem; letter-spacing: 1px;">Global Fashion Awards &bull; 2024</p>
+                </div>
+                <div class="award-card" style="background-color: #FBF9F6; border-radius: 16px; padding: 3rem 2rem; text-align: center; box-shadow: 0 10px 20px rgba(17,17,17,0.04); border: 1px solid #F3ECE3;">
+                    <div class="award-gold-badge" style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #C5A880;">&#127894;</div>
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.3rem; margin-bottom: 0.5rem;">Excellence in Sustainable Design</h3>
+                    <p style="color: #A3855C; line-height: 1.7; font-size: 0.9rem; letter-spacing: 1px;">EcoFashion Coalition Certification &bull; 2023</p>
+                </div>
+                <div class="award-card" style="background-color: #FBF9F6; border-radius: 16px; padding: 3rem 2rem; text-align: center; box-shadow: 0 10px 20px rgba(17,17,17,0.04); border: 1px solid #F3ECE3;">
+                    <div class="award-gold-badge" style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #C5A880;">&#127894;</div>
+                    <h3 style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-weight: 400; letter-spacing: 1px; line-height: 1.2; font-size: 1.3rem; margin-bottom: 0.5rem;">Master Draper Certification</h3>
+                    <p style="color: #A3855C; line-height: 1.7; font-size: 0.9rem; letter-spacing: 1px;">Couture Guild International &bull; 2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.querySelectorAll('section').forEach(sec => {
-            sectionObserver.observe(sec);
-        });
+    <!-- 9. TESTIMONIALS -->
+    <section class="testimonials-section" style="padding: 10rem 0; background-color: #111111; color: #FFFFFF;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="text-center" style="text-align: center;">
+                <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">Words</span>
+                <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative; color: #FFFFFF;">Endorsements</h2>
+            </div>
+            <div class="testimonials-grid responsive-grid-testimonials" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+                <div class="testimonial-card" style="background-color: #1A1A1A; padding: 4rem 3rem; border-radius: 16px; border-top: 3px solid #C5A880; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                    <p class="testimonial-quote" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; font-size: 1.25rem; color: #F3ECE3; margin-bottom: 2rem; line-height: 1.6;">"Saifuddin possesses a rare, commanding understanding of fabric performance. His architectural draping methods elevated our seasonal runway showcase into an international masterpiece."</p>
+                    <p class="testimonial-author" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #C5A880;">&mdash; Elena Rostova, Creative Director</p>
+                </div>
+                <div class="testimonial-card" style="background-color: #1A1A1A; padding: 4rem 3rem; border-radius: 16px; border-top: 3px solid #C5A880; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                    <p class="testimonial-quote" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-style: italic; font-size: 1.25rem; color: #F3ECE3; margin-bottom: 2rem; line-height: 1.6;">"Meticulous, deeply structured, and technically flawless. His digital sample tech packs are beautifully presented, reducing our engineering prototype iteration cycle times by half."</p>
+                    <p class="testimonial-author" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #C5A880;">&mdash; Marc Jacobs, Production Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Combined Lightbox Setup (Triggers for main showcases and lower gallery assets)
-        const activeLightbox = document.getElementById('lightbox');
-        const lightboxTargetImg = document.getElementById('lightbox-img');
+    <!-- 10. CONTACT SECTION -->
+    <section id="contact" class="contact-section" style="padding: 10rem 0; background-color: #FFFFFF;">
+        <div class="section-wrapper" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="contact-grid responsive-grid-2" style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 6rem; align-items: center;">
+                <div class="contact-info-panel">
+                    <span class="section-tag" style="display: inline-block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #A3855C; margin-bottom: 1rem; font-weight: 600;">Connect</span>
+                    <h2 class="section-title" style="font-family: 'Playfair Display', 'Didot', 'Georgia', serif; font-size: 2.75rem; font-weight: 400; letter-spacing: 1px; line-height: 1.2; margin-bottom: 3.5rem; position: relative;">Let's Create Together</h2>
+                    <p class="contact-intro" style="color: #444444; line-height: 1.7; margin-bottom: 3rem; font-size: 1.1rem;">Available for luxury commission work, brand consulting, and permanent design director opportunities worldwide.</p>
+                    
+                    <div class="info-block" style="margin-bottom: 2rem;">
+                        <h4 style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Inquiries</h4>
+                        <p style="color: #111111; font-size: 1.1rem; line-height: 1.7;">studio@saifuddinkhan.com</p>
+                        <p style="color: #111111; font-size: 1.1rem; line-height: 1.7;">+1 (555) 019-2834</p>
+                    </div>
+                    <div class="info-block" style="margin-bottom: 2rem;">
+                        <h4 style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Mailing Address</h4>
+                        <p style="color: #111111; font-size: 1.1rem; line-height: 1.7;">Avenue Montaigne, Building 4B</p>
+                        <p style="color: #111111; font-size: 1.1rem; line-height: 1.7;">Paris, France 75008</p>
+                    </div>
+                    <div class="info-block" style="margin-bottom: 2rem;">
+                        <h4 style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: #A3855C; margin-bottom: 0.5rem;">Networks</h4>
+                        <p style="color: #111111; font-size: 1.1rem; line-height: 1.7;"><a href="#" class="gold-link" style="color: #111111; text-decoration: none; border-bottom: 1px solid #C5A880; transition: color 0.2s ease;">Instagram</a> &bull; <a href="#" class="gold-link" style="color: #111111; text-decoration: none; border-bottom: 1px solid #C5A880; transition: color 0.2s ease;">LinkedIn</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-form-panel" style="border-radius: 16px; background-color: #FBF9F6; padding: 4rem; box-shadow: 0 25px 50px rgba(17,17,17,0.04); border: 1px solid #F3ECE3;">
+                    <form class="editorial-form" action="#" method="POST">
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; color: #444444;">Your Name</label>
+                            <input type="text" class="form-input" style="width: 100%; padding: 1rem 0; background-color: transparent; border: none; border-bottom: 1px solid #CCCCCC; font-size: 1rem; color: #111111; transition: border-color 0.3s ease;" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; color: #444444;">Email Address</label>
+                            <input type="email" class="form-input" style="width: 100%; padding: 1rem 0; background-color: transparent; border: none; border-bottom: 1px solid #CCCCCC; font-size: 1rem; color: #111111; transition: border-color 0.3s ease;" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; color: #444444;">Subject</label>
+                            <input type="text" class="form-input" style="width: 100%; padding: 1rem 0; background-color: transparent; border: none; border-bottom: 1px solid #CCCCCC; font-size: 1rem; color: #111111; transition: border-color 0.3s ease;" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.5rem; color: #444444;">Project Details</label>
+                            <textarea class="form-input" rows="5" style="width: 100%; padding: 1rem 0; background-color: transparent; border: none; border-bottom: 1px solid #CCCCCC; font-size: 1rem; color: #111111; transition: border-color 0.3s ease; resize: vertical;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" style="display: block; width: 100%; text-align: center; padding: 1rem 2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; font-weight: 500; background-color: #111111; color: #FFFFFF; border: 1px solid #111111; cursor: pointer;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.querySelectorAll('.gallery-item img, .view-trigger img').forEach(img => {
-            img.addEventListener('click', function() {
-                lightboxTargetImg.src = this.src;
-                activeLightbox.classList.add('active');
-            });
-        });
-        
-        function closeLightbox() {
-            activeLightbox.classList.remove('active');
-        }
-        
-        activeLightbox.addEventListener('click', function(e) {
-            if (e.target === this) closeLightbox();
-        });
-
-        // Initialize Hero view instantly
-        document.getElementById('hero').classList.add('revealed');
-    </script>
+    <!-- 11. FOOTER -->
+    <footer class="main-footer" style="background-color: #111111; padding: 4rem 0; color: #FFFFFF; border-top: 1px solid #222222;">
+        <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+            <p class="footer-copy" style="color: #888888; font-size: 0.9rem; line-height: 1.7;">&copy; 2026 Saifuddin Khan. Crafted in Pure Elegance.</p>
+            <div class="footer-socials">
+                <a href="#" class="footer-link" style="color: #F3ECE3; text-decoration: none; margin-right: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s ease;">Instagram</a>
+                <a href="#" class="footer-link" style="color: #F3ECE3; text-decoration: none; margin-right: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s ease;">LinkedIn</a>
+                <a href="#" class="footer-link" style="color: #F3ECE3; text-decoration: none; margin-right: 1.5rem; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s ease;">Pinterest</a>
+            </div>
+            <a href="#home" class="back-to-top" style="color: #C5A880; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s ease; display: inline-block;">Back to Top &uarr;</a>
+        </div>
+    </footer>
 
 </body>
 </html>
