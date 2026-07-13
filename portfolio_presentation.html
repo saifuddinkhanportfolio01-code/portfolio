@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saifuddin Khan - UX/UI & Sketches Portfolio</title>
+    <style>
+        :root {
+            --bg-main: #0F172A;
+            --bg-card: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --accent: #38BDF8;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .slide {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .image-container {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 350px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .metric-card {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--border);
+            color: var(--text-main);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 180px;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.92);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--text-main);
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+
+        <!-- SLIDE 1: TITLE -->
+        <section class="slide">
+            <h1>Saifuddin Khan</h1>
+            <p style="color: var(--accent); font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">UX/UI & Sketches Portfolio</p>
+            <p>Product Designer focused on building high-impact, data-driven digital experiences. Here is a look at my end-to-end design process, from initial conceptual discovery to final production mockups.</p>
+            <div>
+                <span class="tag">Figma</span>
+                <span class="tag">Product Strategy</span>
+                <span class="tag">User Research</span>
+                <span class="tag">Wireframing</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: DISCOVERY & SKETCHING -->
+        <section class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2>01. Discovery & Wireframing</h2>
+                    <p>Every project starts by understanding user pain points. I map out early user flows and map structural wireframes on paper to iterate rapidly before touching digital design tools.</p>
+                    <p>This phase ensures information hierarchy aligns perfectly with business objectives and technical scoping constraints.</p>
+                </div>
+                <div class="image-container">
+                    <img src="Sketches.png" alt="Saifuddin Khan Wireframe Sketches">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: HIGH-FIDELITY DESIGN -->
+        <section class="slide">
+            <div class="grid-2">
+                <div class="image-container">
+                    <img src="UXUI.png" alt="Saifuddin Khan UI Design Mockup">
+                </div>
+                <div>
+                    <h2>02. High-Fidelity UI Design</h2>
+                    <p>Translating validated wireframes into responsive, pixel-perfect UI designs. I establish scalable design systems with reusable components, clear typography hierarchies, and strict WCAG accessibility standards.</p>
+                    <p>Designs are built ready for smooth, seamless handoff to engineering teams.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: BEFORE & AFTER OPTIMIZATION -->
+        <section class="slide">
+            <h2>03. Optimization Strategy</h2>
+            <p>How user testing and analytics data informed design iterations to remove onboarding friction and improve usability.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identified Problem</th>
+                        <th>Design Solution</th>
+                        <th>Impact Metric</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Complex 5-step signup dropoff</td>
+                        <td>Single sign-on & progressive disclosure</td>
+                        <td>+35% Conversion</td>
+                    </tr>
+                    <tr>
+                        <td>Low feature discovery on home screen</td>
+                        <td>Contextual tooltips & bottom navigation update</td>
+                        <td>+22% Engagement</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SLIDE 5: METRICS & IMPACT -->
+        <section class="slide">
+            <h2>04. Business Impact & Results</h2>
+            <p>Design is an investment, not just an aesthetic step. Here is how my latest product optimizations directly moved core company performance metrics.</p>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">4.8★</div>
+                    <p>App Store Rating</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">-40%</div>
+                    <p>Support Tickets</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">+18%</div>
+                    <p>User Retention</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: FULL GALLERY - ALL 49 IMAGES -->
+        <section class="slide">
+            <h2>05. Full Sketch & Screen Gallery</h2>
+            <p>Complete collection of raw sketches, wireframes and UI screens from this project. Click any image to view full size.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="img01.jpg" alt="Portfolio Image 1"></div>
+                <div class="gallery-item"><img src="img02.jpg" alt="Portfolio Image 2"></div>
+                <div class="gallery-item"><img src="img03.jpg" alt="Portfolio Image 3"></div>
+                <div class="gallery-item"><img src="img04.jpg" alt="Portfolio Image 4"></div>
+                <div class="gallery-item"><img src="img05.jpg" alt="Portfolio Image 5"></div>
+                <div class="gallery-item"><img src="img06.jpg" alt="Portfolio Image 6"></div>
+                <div class="gallery-item"><img src="img07.jpg" alt="Portfolio Image 7"></div>
+                <div class="gallery-item"><img src="img08.jpg" alt="Portfolio Image 8"></div>
+                <div class="gallery-item"><img src="img09.jpg" alt="Portfolio Image 9"></div>
+                <div class="gallery-item"><img src="img10.jpg" alt="Portfolio Image 10"></div>
+                <div class="gallery-item"><img src="img11.jpg" alt="Portfolio Image 11"></div>
+                <div class="gallery-item"><img src="img12.jpg" alt="Portfolio Image 12"></div>
+                <div class="gallery-item"><img src="img13.jpg" alt="Portfolio Image 13"></div>
+                <div class="gallery-item"><img src="img14.jpg" alt="Portfolio Image 14"></div>
+                <div class="gallery-item"><img src="img15.jpg" alt="Portfolio Image 15"></div>
+                <div class="gallery-item"><img src="img16.jpg" alt="Portfolio Image 16"></div>
+                <div class="gallery-item"><img src="img17.jpg" alt="Portfolio Image 17"></div>
+                <div class="gallery-item"><img src="img18.jpg" alt="Portfolio Image 18"></div>
+                <div class="gallery-item"><img src="img19.jpg" alt="Portfolio Image 19"></div>
+                <div class="gallery-item"><img src="img20.jpg" alt="Portfolio Image 20"></div>
+                <div class="gallery-item"><img src="img21.jpg" alt="Portfolio Image 21"></div>
+                <div class="gallery-item"><img src="img22.jpg" alt="Portfolio Image 22"></div>
+                <div class="gallery-item"><img src="img23.jpg" alt="Portfolio Image 23"></div>
+                <div class="gallery-item"><img src="img24.jpg" alt="Portfolio Image 24"></div>
+                <div class="gallery-item"><img src="img25.jpg" alt="Portfolio Image 25"></div>
+                <div class="gallery-item"><img src="img26.jpg" alt="Portfolio Image 26"></div>
+                <div class="gallery-item"><img src="img27.jpg" alt="Portfolio Image 27"></div>
+                <div class="gallery-item"><img src="img28.jpg" alt="Portfolio Image 28"></div>
+                <div class="gallery-item"><img src="img29.jpg" alt="Portfolio Image 29"></div>
+                <div class="gallery-item"><img src="img30.jpg" alt="Portfolio Image 30"></div>
+                <div class="gallery-item"><img src="img31.jpg" alt="Portfolio Image 31"></div>
+                <div class="gallery-item"><img src="img32.jpg" alt="Portfolio Image 32"></div>
+                <div class="gallery-item"><img src="img33.jpg" alt="Portfolio Image 33"></div>
+                <div class="gallery-item"><img src="img34.jpg" alt="Portfolio Image 34"></div>
+                <div class="gallery-item"><img src="img35.jpg" alt="Portfolio Image 35"></div>
+                <div class="gallery-item"><img src="img36.jpg" alt="Portfolio Image 36"></div>
+                <div class="gallery-item"><img src="img37.jpg" alt="Portfolio Image 37"></div>
+                <div class="gallery-item"><img src="img38.jpg" alt="Portfolio Image 38"></div>
+                <div class="gallery-item"><img src="img39.jpg" alt="Portfolio Image 39"></div>
+                <div class="gallery-item"><img src="img40.jpg" alt="Portfolio Image 40"></div>
+                <div class="gallery-item"><img src="img41.jpg" alt="Portfolio Image 41"></div>
+                <div class="gallery-item"><img src="img42.jpg" alt="Portfolio Image 42"></div>
+                <div class="gallery-item"><img src="img43.jpg" alt="Portfolio Image 43"></div>
+                <div class="gallery-item"><img src="img44.jpg" alt="Portfolio Image 44"></div>
+                <div class="gallery-item"><img src="img45.jpg" alt="Portfolio Image 45"></div>
+                <div class="gallery-item"><img src="img46.jpg" alt="Portfolio Image 46"></div>
+                <div class="gallery-item"><img src="img47.jpg" alt="Portfolio Image 47"></div>
+                <div class="gallery-item"><img src="img48.jpg" alt="Portfolio Image 48"></div>
+                <div class="gallery-item"><img src="img49.jpg" alt="Portfolio Image 49"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+
+    <script>
+        document.querySelectorAll('.gallery-item img').forEach(function(img) {
+            img.addEventListener('click', function() {
+                document.getElementById('lightbox-img').src = this.src;
+                document.getElementById('lightbox').classList.add('active');
+            });
+        });
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+    </script>
+
+</body>
+</html>
